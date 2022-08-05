@@ -1,7 +1,13 @@
-import {List} from "./components";
+import { List } from "./components";
+import Nav from "./views/nav/Nav";
 
 const App = () => {
-  return (<List/>);
-}
+  return (
+    <>
+      <Nav />
+      <List />
+    </>
+  );
+};
 
 export default App;
