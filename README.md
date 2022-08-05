@@ -14,7 +14,7 @@ VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=esbenp.
 # Branch
 
 there is a branch for every step in this exercise
-for example: git checkout step1
+for example: git checkout step-1
 
 # Step 1
 
