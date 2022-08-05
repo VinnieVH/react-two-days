@@ -5,19 +5,14 @@ const style = {
         padding: 0
 }
 
-const List = () => {
+interface ListItemProps {
+        numberOfItems: number;
+}
+
+const List = (props: ListItemProps) => {
    return (
-       <ul style={style}>
-           <ListItem />
-           <ListItem />
-           <ListItem />
-           <ListItem />
-           <ListItem />
-           <ListItem />
-           <ListItem />
-           <ListItem />
-           <ListItem />
-        </ul>);
+       <ul style={style}>{[...Array(props.numberOfItems)].map((_,index)=><ListItem key={index} />)}</ul>
+   );
 }
 
 export default List;
