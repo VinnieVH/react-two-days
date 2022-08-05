@@ -1,17 +1,27 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { getHttpRequest } from "../../api/api-client";
+import { MarketData } from "../../models/market-data";
 
 export const DetailsView = () => {
   const { id } = useParams();
-  const [coinId, setCoinId] = useState(id || "");
+  const [coin, setCoin] = useState<MarketData>();
 
   useEffect(() => {
-    id && setCoinId(id);
+    const fetchData = async () => {
+      const response = await getHttpRequest(`/markets/${id}`);
+      if (!response.error) {
+        const result = response.data.result;
+        setCoin(result);
+      }
+    };
+    fetchData();
   }, [id]);
 
   return (
     <div>
-      <h3>ID: {id}</h3>
+      <h1>ID: {id}</h1>
+      <h2>{coin?.last}$</h2>
     </div>
   );
 };
