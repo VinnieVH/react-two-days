@@ -8,7 +8,7 @@ const style = {
 
 type ListItemProps = {
   name: string;
-  volume: string;
+  volume: number;
 };
 const ListItem = (props: ListItemProps) => {
   const navigate = useNavigate();
