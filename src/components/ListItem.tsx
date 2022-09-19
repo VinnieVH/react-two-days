@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 const style = {
   border: "1px solid black",
   borderRadius: "15px",
@@ -7,14 +5,12 @@ const style = {
 };
 
 type ListItemProps = {
-  name: string;
-  volume: string;
+  number: number;
 };
 const ListItem = (props: ListItemProps) => {
-  const navigate = useNavigate();
   return (
-    <li style={style} onClick={() => navigate(`/${props.name}`)}>
-      {props.name}, {props.volume}
+    <li style={style}>
+      {props.number}
     </li>
   );
 };

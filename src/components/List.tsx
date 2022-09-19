@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { getHttpRequest } from "../api/api-client";
-import { MarketData } from "../models/market-data";
 import ListItem from "./ListItem";
 
 const style = {
@@ -8,32 +6,19 @@ const style = {
   padding: 0,
 };
 
-interface ListItemProps {
-  numberOfItems: number;
-}
-
-const List = (props: ListItemProps) => {
-  const [marketData, setMarketData] = useState<MarketData[]>([]);
+const List = () => {
+  const [numberOfItems, setNumberOfItems] = useState<number>(0);
   useEffect(() => {
-    const fetchMarketData = async () => {
-      const response = await getHttpRequest("/markets");
-      if (!response.error) {
-        const result = response.data.result;
-        const filteredResult = filterPerpetualContracts(result);
-        setMarketData(filteredResult);
-      }
-    };
-    fetchMarketData();
+    const interval = setInterval(() => {
+      setNumberOfItems((numberOfItems) => numberOfItems + 1);
+    }, 2500);
+    return () => clearInterval(interval);
   }, []);
-
-  const filterPerpetualContracts = (data: MarketData[]) => {
-    return data.filter((x) => x.name.toLowerCase().includes("perp"));
-  };
+  
   return (
     <ul style={style}>
-      {marketData?.map((data: any, index) => (
-        <ListItem key={index} name={data.name} volume={data.volumeUsd24h} />
-      ))}
+
+      {[...Array(numberOfItems)].map((_,index)=><ListItem key={index} number={index} />)}
     </ul>
   );
 };
