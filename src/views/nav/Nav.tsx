@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { colors } from "../../utils";
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ export default Nav;
 const AppBar = styled.div`
   height: 60px;
   color: white;
-  background-color: #1976d2;
+  background-color: ${colors.blue};
 `;
 
 const AppBarFlex = styled.div`
