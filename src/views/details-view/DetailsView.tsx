@@ -20,8 +20,12 @@ export const DetailsView = () => {
 
   return (
     <div>
-      <h1>ID: {id}</h1>
-      <h2>{coin?.last}$</h2>
+      {coin && (
+        <>
+          <h1>ID: {id}</h1>
+          <h2>{coin?.last}$</h2>
+        </>
+      )}
     </div>
   );
 };
