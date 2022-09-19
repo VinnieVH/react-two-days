@@ -8,11 +8,7 @@ const style = {
   padding: 0,
 };
 
-interface ListItemProps {
-  numberOfItems: number;
-}
-
-const List = (props: ListItemProps) => {
+const List = () => {
   const [marketData, setMarketData] = useState<MarketData[]>([]);
   useEffect(() => {
     const fetchMarketData = async () => {
