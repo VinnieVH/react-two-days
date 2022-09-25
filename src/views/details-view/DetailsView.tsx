@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { PacmanLoader } from "react-spinners";
-import styled from "styled-components";
 import { getHttpRequest } from "../../api/api-client";
+import { HistoricalMarketDataComboChart } from "../../components/charts/HistoricalMarketDataComboChart";
 import { PacmanSpinner } from "../../components/spinners/PacmanSpinner";
+import { HistoricalMarketData } from "../../models/historical-market-data";
 import { MarketData } from "../../models/market-data";
+import { getHistoricalCoinData, mapHistoricalCoinDataToChartData } from "./details-view-functions";
 
 export const DetailsView = () => {
   const { id } = useParams();
   const [coin, setCoin] = useState<MarketData>();
+  const [historicalCoinData, setHistoricalCoinData] = useState<HistoricalMarketData[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -20,19 +22,26 @@ export const DetailsView = () => {
       }
       setIsLoading(false);
     };
+
+    const fetchHistoricalData = async () => {
+      const response = await getHistoricalCoinData(id || "");
+      setHistoricalCoinData(response);
+    };
     fetchData();
+    fetchHistoricalData();
   }, [id]);
 
   return (
     <div>
-      {coin ? (
+      {isLoading ? (
+        <PacmanSpinner />
+      ) : (
         <>
           <h1>ID: {id}</h1>
           <h2>{coin?.last}$</h2>
         </>
-      ) : (
-        <PacmanSpinner />
       )}
+      {historicalCoinData && <HistoricalMarketDataComboChart chartData={mapHistoricalCoinDataToChartData(historicalCoinData)} />}
     </div>
   );
 };
