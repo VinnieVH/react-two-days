@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import useMediaQuerySize from "../../hooks/useMediaQuerySize";
+import { Breakpoints } from "../../models/breakpoints-enum";
 import { colors } from "../../utils";
 
 const Nav = () => {
   const navigate = useNavigate();
+  const { breakpoint, breakpointGreaterOrEqualThan } = useMediaQuerySize();
 
   return (
     <AppBar>
@@ -17,9 +20,11 @@ const Nav = () => {
           />
         </AppBarItem>
         <AppBarItem onClick={() => navigate("/")}>CRYPTOCURRENCIES</AppBarItem>
-        <AppBarItem style={{ justifyContent: "flex-end" }} onClick={() => navigate("/")}>
-          WATCHLIST
-        </AppBarItem>
+        {breakpointGreaterOrEqualThan(breakpoint, Breakpoints.m) && (
+          <AppBarItem style={{ justifyContent: "flex-end" }} onClick={() => navigate("/")}>
+            WATCHLIST
+          </AppBarItem>
+        )}
       </AppBarFlex>
     </AppBar>
   );
