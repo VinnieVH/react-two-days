@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getHttpRequest } from "../../api/api-client";
 import { HistoricalMarketDataComboChart } from "../../components/charts/HistoricalMarketDataComboChart";
 import { PacmanSpinner } from "../../components/spinners/PacmanSpinner";
+import { LastSelectedCoinContext } from "../../contexts/LastSelectedCoinContext";
 import { HistoricalMarketData } from "../../models/historical-market-data";
 import { MarketData } from "../../models/market-data";
 import { getHistoricalCoinData, mapHistoricalCoinDataToChartData } from "./details-view-functions";
@@ -12,6 +13,8 @@ export const DetailsView = () => {
   const [coin, setCoin] = useState<MarketData>();
   const [historicalCoinData, setHistoricalCoinData] = useState<HistoricalMarketData[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const { setLastCoin } = useContext(LastSelectedCoinContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +32,7 @@ export const DetailsView = () => {
     };
     fetchData();
     fetchHistoricalData();
+    id && setLastCoin(id);
   }, [id]);
 
   return (
