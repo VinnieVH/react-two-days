@@ -28,7 +28,7 @@ const calculateBreakpoint = (innerWidth: number) => {
   return Breakpoints.xs;
 };
 
-const calculateSizeFromBreakpoint = (breakpoint: Breakpoints) => {
+export const calculateSizeFromBreakpoint = (breakpoint: Breakpoints) => {
   if (breakpoint === Breakpoints.l) return BREAKPOINT_LARGE;
   if (breakpoint === Breakpoints.m) return BREAKPOINT_MEDIUM;
   if (breakpoint === Breakpoints.s) return BREAKPOINT_SMALL;
