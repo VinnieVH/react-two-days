@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colors } from "../../utils";
 import { AiFillStar } from "react-icons/ai";
 import { Icon } from "../../utils/Icon";
@@ -24,7 +24,9 @@ const Nav = () => {
         </AppBarItem>
         <AppBarItem onClick={() => navigate("/")}>CRYPTOCURRENCIES</AppBarItem>
         <AppBarItem style={{ justifyContent: "flex-end" }} onClick={() => navigate("/")}>
-          <AiFillStar size={25} color="yellow" />
+          <AnimatedStar>
+            <AiFillStar size={25} color="yellow" />
+          </AnimatedStar>
         </AppBarItem>
       </AppBarFlex>
     </AppBar>
@@ -53,4 +55,20 @@ const AppBarItem = styled.div`
   font-weight: 500;
   font-size: 15px;
   margin: 1rem;
+`;
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const AnimatedStar = styled.div`
+  :hover  {
+    animation: ${rotate} 2s linear infinite;
+  }
 `;
