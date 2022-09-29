@@ -35,6 +35,27 @@ export const DetailsView = () => {
     id && setLastCoin(id);
   }, [id]);
 
+  useEffect(() => {
+    const ws = new WebSocket("wss://ws.bitstamp.net");
+    const apiCall = {
+      event: "bts:subscribe",
+      data: { channel: "order_book_btcusd" },
+    };
+
+    ws.onopen = (event) => {
+      console.log("OPEN");
+      ws.send(JSON.stringify(apiCall));
+    };
+
+    ws.onmessage = (event) => {
+      console.log(JSON.parse(event.data).data.asks[0][0]);
+    };
+
+    return () => {
+      ws.close();
+    };
+  }, []);
+
   return (
     <div>
       {isLoading ? (
