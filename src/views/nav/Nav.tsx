@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { colors } from "../../utils";
+import { AiFillStar } from "react-icons/ai";
+import { Icon } from "../../utils/Icon";
+import { CoinMarketCapLogo } from "../../assets";
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -9,16 +12,19 @@ const Nav = () => {
     <AppBar>
       <AppBarFlex>
         <AppBarItem>
-          <img
+          <div onClick={() => navigate("/")}>
+            <Icon title="coinmarketcap" icon={CoinMarketCapLogo} size={"150px"} fill="pink" />
+          </div>
+          {/* <img
             alt="logo coinmarketcap"
             src="https://assets-global.website-files.com/5f15b50525745912903311ad/5f15b505dd58c115cd49d484_Logo-full-white.svg"
             width={150}
             onClick={() => navigate("/")}
-          />
+          /> */}
         </AppBarItem>
         <AppBarItem onClick={() => navigate("/")}>CRYPTOCURRENCIES</AppBarItem>
         <AppBarItem style={{ justifyContent: "flex-end" }} onClick={() => navigate("/")}>
-          WATCHLIST
+          <AiFillStar size={25} color="yellow" />
         </AppBarItem>
       </AppBarFlex>
     </AppBar>
